@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Merwan Brahimi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            padding: 40px 20px;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(75, 0, 130, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 20%, rgba(148, 0, 211, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            animation: glow 8s ease-in-out infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+            box-shadow: 0 0 60px rgba(138, 43, 226, 0.4),
+                        0 0 100px rgba(75, 0, 130, 0.2),
+                        inset 0 0 100px rgba(138, 43, 226, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            position: relative;
+            animation: borderPulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes borderPulse {
+            0%, 100% { box-shadow: 0 0 60px rgba(138, 43, 226, 0.4), 0 0 100px rgba(75, 0, 130, 0.2); }
+            50% { box-shadow: 0 0 80px rgba(138, 43, 226, 0.6), 0 0 120px rgba(75, 0, 130, 0.4); }
+        }
+        
+        .led-strip {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                #8b00ff 0%, 
+                #da00ff 25%, 
+                #8b00ff 50%, 
+                #4b0082 75%, 
+                #8b00ff 100%);
+            animation: ledMove 3s linear infinite;
+        }
+        
+        @keyframes ledMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2d1b69 0%, #1a0b3d 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            border-bottom: 2px solid rgba(138, 43, 226, 0.5);
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #8b00ff, #da00ff, #8b00ff, transparent);
+            animation: scanline 2s linear infinite;
+        }
+        
+        @keyframes scanline {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(138, 43, 226, 0.8),
+                         0 0 40px rgba(138, 43, 226, 0.4);
+            animation: textGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 0 0 20px rgba(138, 43, 226, 0.8), 0 0 40px rgba(138, 43, 226, 0.4); }
+            50% { text-shadow: 0 0 30px rgba(138, 43, 226, 1), 0 0 60px rgba(138, 43, 226, 0.6); }
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+            color: #b19cd9;
+        }
+        
+        .content {
+            padding: 50px;
+            color: #e0e0e0;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section h2 {
+            color: #da00ff;
+            font-size: 2em;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid rgba(138, 43, 226, 0.5);
+            text-shadow: 0 0 15px rgba(218, 0, 255, 0.6);
+            position: relative;
+        }
+        
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 30%;
+            height: 3px;
+        }
+        
+        .education-item, .experience-item {
+            margin-bottom: 30px;
+            padding: 20px;
+            padding-left: 25px;
+            border-left: 3px solid #8b00ff;
+            background: rgba(138, 43, 226, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.1);
+        }
+        
+        .education-item:hover, .experience-item:hover {
+            background: rgba(138, 43, 226, 0.1);
+            border-left-color: #da00ff;
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.3);
+            transform: translateX(5px);
+        }
+        
+        .education-item h3, .experience-item h3 {
+            color: #b19cd9;
+            font-size: 1.4em;
+            margin-bottom: 8px;
+        }
+        
+        .education-item .institution, .experience-item .company {
+            color: #da00ff;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .education-item .date, .experience-item .date {
+            color: #9370db;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .skill-category {
+            background: rgba(138, 43, 226, 0.08);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            border-left: 4px solid #8b00ff;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.1);
+        }
+        
+        .skill-category:hover {
+            background: rgba(138, 43, 226, 0.12);
+            border-left-color: #da00ff;
+            box-shadow: 0 0 25px rgba(138, 43, 226, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .skill-category h3 {
+            color: #da00ff;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .skill-category ul {
+            list-style: none;
+        }
+        
+        .skill-category li {
+            padding: 8px 0;
+            color: #c0c0c0;
+            transition: color 0.3s ease;
+        }
+        
+        .skill-category li:hover {
+            color: #da00ff;
+        }
+        
+        .skill-category li:before {
+            content: "▹ ";
+            color: #8b00ff;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(139, 0, 255, 0.5);
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: rgba(138, 43, 226, 0.15);
+            border-radius: 25px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background: rgba(138, 43, 226, 0.25);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+            transform: scale(1.05);
+        }
+        
+        .languages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .language-item {
+            background: rgba(138, 43, 226, 0.08);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .language-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #da00ff, transparent);
+            animation: ledScan 3s linear infinite;
+        }
+        
+        @keyframes ledScan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .language-item:hover {
+            background: rgba(138, 43, 226, 0.15);
+            border-color: #da00ff;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+            transform: translateY(-3px);
+        }
+        
+        .language-name {
+            font-weight: 600;
+            color: #b19cd9;
+            margin-bottom: 5px;
+        }
+        
+        .language-level {
+            font-size: 0.9em;
+            color: #9370db;
+        }
+        
+        ul {
+            list-style-position: inside;
+            color: #c0c0c0;
+        }
+        
+        ul li {
+            margin-bottom: 12px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 30px 25px;
+            }
+            
+            .languages-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="led-strip"></div>
+        <div class="header">
+            <h1>Dr. Merwan Brahimi</h1>
+            <p>Chercheur & Expert Multidisciplinaire | Polyglotte</p>
+            <div class="contact-info">
+                <div class="contact-item">📧 merwan.brahimi@email.fr</div>
+                <div class="contact-item">📱 07 76 75 47 61</div>
+                <div class="contact-item">📍 Paris, France</div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2>🎓 Formation Académique</h2>
+                
+                <div class="education-item">
+                    <h3>Doctorat en Intelligence Artificielle</h3>
+                    <div class="institution">Université Paris-Saclay</div>
+                    <div class="date">2020 - 2023</div>
+                    <p>Thèse : "Architectures neuronales avancées pour le traitement du langage naturel et l'apprentissage profond". Mention Très Honorable avec félicitations du jury.</p>
+                </div>
+                
+                <div class="education-item">
+                    <h3>Doctorat en Neurosciences Cognitives</h3>
+                    <div class="institution">Université Paris Descartes</div>
+                    <div class="date">2017 - 2020</div>
+                    <p>Thèse : "Mécanismes neuronaux de la mémoire et de l'apprentissage : approches computationnelles et expérimentales". Mention Très Honorable.</p>
+                </div>
+                
+                <div class="education-item">
+                    <h3>Doctorat en Physique Théorique</h3>
+                    <div class="institution">École Polytechnique</div>
+                    <div class="date">2014 - 2017</div>
+                    <p>Thèse : "Théorie quantique des champs et applications en physique des particules". Prix de thèse de la Société Française de Physique.</p>
+                </div>
+                
+                <div class="education-item">
+                    <h3>Master en Mathématiques Appliquées</h3>
+                    <div class="institution">Sorbonne Université</div>
+                    <div class="date">2012 - 2014</div>
+                    <p>Spécialisation en analyse numérique et modélisation. Mention Très Bien.</p>
+                </div>
+                
+                <div class="education-item">
+                    <h3>Master en Informatique & Intelligence Artificielle</h3>
+                    <div class="institution">École Normale Supérieure Paris-Saclay</div>
+                    <div class="date">2011 - 2013</div>
+                    <p>Spécialisation en apprentissage automatique et sciences cognitives. Mention Très Bien.</p>
+                </div>
+                
+                <div class="education-item">
+                    <h3>Master en Physique Fondamentale</h3>
+                    <div class="institution">Université Paris-Sud (Orsay)</div>
+                    <div class="date">2010 - 2012</div>
+                    <p>Spécialisation en physique théorique et physique quantique. Mention Très Bien.</p>
+                </div>
+                
+                <div class="education-item">
+                    <h3>Master en Neurosciences</h3>
+                    <div class="institution">Université Pierre et Marie Curie</div>
+                    <div class="date">2009 - 2011</div>
+                    <p>Spécialisation en neurosciences computationnelles et cognitives. Mention Très Bien.</p>
+                </div>
+                
+                <div class="education-item">
+                    <h3>Master en Biologie Moléculaire</h3>
+                    <div class="institution">Université Paris Diderot</div>
+                    <div class="date">2008 - 2010</div>
+                    <p>Spécialisation en bioinformatique et génétique. Mention Très Bien.</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>💼 Expérience Professionnelle</h2>
+                
+                <div class="experience-item">
+                    <h3>Chercheur Senior en IA</h3>
+                    <div class="company">CNRS - Institut de Recherche en Informatique</div>
+                    <div class="date">2023 - Présent</div>
+                    <p>Direction de projets de recherche sur l'IA explicable et l'apprentissage par renforcement. Encadrement de 5 doctorants. Publication de 15+ articles dans des revues internationales à comité de lecture.</p>
+                </div>
+                
+                <div class="experience-item">
+                    <h3>Post-Doctorant</h3>
+                    <div class="company">MIT - Computer Science and Artificial Intelligence Laboratory</div>
+                    <div class="date">2021 - 2023</div>
+                    <p>Recherche sur l'intersection entre neurosciences et intelligence artificielle. Collaboration avec des équipes pluridisciplinaires internationales.</p>
+                </div>
+                
+                <div class="experience-item">
+                    <h3>Consultant Scientifique</h3>
+                    <div class="company">Diverses entreprises tech (Google Research, DeepMind)</div>
+                    <div class="date">2018 - Présent</div>
+                    <p>Conseil en stratégie R&D, développement d'algorithmes d'apprentissage automatique, et formation de équipes techniques.</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>🏢 Entrepreneuriat</h2>
+                
+                <div class="experience-item">
+                    <h3>Propriétaire & Directeur Général</h3>
+                    <div class="company">BrahiTech Industries - Manufacture de Composants Électroniques</div>
+                    <div class="date">2019 - Présent</div>
+                    <p>Direction d'une entreprise de fabrication de composants électroniques avancés. 150 employés. Spécialisation dans les semi-conducteurs et les circuits imprimés haute performance. Chiffre d'affaires annuel : 12M€.</p>
+                </div>
+                
+                <div class="experience-item">
+                    <h3>Co-Fondateur & PDG</h3>
+                    <div class="company">Precision Manufacturing Solutions - Manufacture de Pièces de Précision</div>
+                    <div class="date">2016 - Présent</div>
+                    <p>Création et gestion d'une entreprise spécialisée dans la fabrication de pièces mécaniques de haute précision pour l'aérospatiale et l'automobile. 80 employés. Certification ISO 9001. CA annuel : 8M€.</p>
+                </div>
+                
+                <div class="experience-item">
+                    <h3>Propriétaire</h3>
+                    <div class="company">Groupe Bella Italia - 4 Restaurants Italiens</div>
+                    <div class="date">2018 - Présent</div>
+                    <p>Propriétaire et gérant de 4 restaurants italiens gastronomiques à Paris (Marais, Saint-Germain, Montmartre, La Défense). Équipe totale de 60 personnes. Spécialités : cuisine traditionnelle italienne authentique, pâtes fraîches maison, pizzas napolitaines au feu de bois. Étoilé au Guide Michelin (restaurant du Marais).</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>🌍 Compétences Linguistiques</h2>
+                <div class="languages-grid">
+                    <div class="language-item">
+                        <div class="language-name">🇫🇷 Français</div>
+                        <div class="language-level">Natif</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇬🇧 Anglais</div>
+                        <div class="language-level">Courant (C2)</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇸🇦 Arabe</div>
+                        <div class="language-level">Bilingue</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇩🇪 Allemand</div>
+                        <div class="language-level">Courant (C1)</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇪🇸 Espagnol</div>
+                        <div class="language-level">Courant (C1)</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇮🇹 Italien</div>
+                        <div class="language-level">Avancé (B2)</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇵🇹 Portugais</div>
+                        <div class="language-level">Avancé (B2)</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇷🇺 Russe</div>
+                        <div class="language-level">Intermédiaire (B1)</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇨🇳 Mandarin</div>
+                        <div class="language-level">Intermédiaire (B1)</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇯🇵 Japonais</div>
+                        <div class="language-level">Intermédiaire (B1)</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇰🇷 Coréen</div>
+                        <div class="language-level">Intermédiaire (A2)</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇹🇷 Turc</div>
+                        <div class="language-level">Intermédiaire (A2)</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇮🇳 Hindi</div>
+                        <div class="language-level">Intermédiaire (A2)</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇳🇱 Néerlandais</div>
+                        <div class="language-level">Intermédiaire (A2)</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇸🇪 Suédois</div>
+                        <div class="language-level">Débutant (A1)</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇵🇱 Polonais</div>
+                        <div class="language-level">Débutant (A1)</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇬🇷 Grec</div>
+                        <div class="language-level">Débutant (A1)</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇮🇱 Hébreu</div>
+                        <div class="language-level">Débutant (A1)</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇮🇷 Persan</div>
+                        <div class="language-level">Notions</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇻🇳 Vietnamien</div>
+                        <div class="language-level">Notions</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇹🇭 Thaï</div>
+                        <div class="language-level">Notions</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇮🇩 Indonésien</div>
+                        <div class="language-level">Notions</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇫🇮 Finnois</div>
+                        <div class="language-level">Notions</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇭🇺 Hongrois</div>
+                        <div class="language-level">Notions</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🇨🇿 Tchèque</div>
+                        <div class="language-level">Notions</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>💻 Langages de Programmation</h2>
+                <div class="languages-grid">
+                    <div class="language-item">
+                        <div class="language-name">🐍 Python</div>
+                        <div class="language-level">Expert</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">⚙️ C++</div>
+                        <div class="language-level">Expert</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">☕ Java</div>
+                        <div class="language-level">Avancé</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🟨 JavaScript</div>
+                        <div class="language-level">Avancé</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">📘 TypeScript</div>
+                        <div class="language-level">Avancé</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">📊 R</div>
+                        <div class="language-level">Avancé</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🔵 Go</div>
+                        <div class="language-level">Intermédiaire</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🦀 Rust</div>
+                        <div class="language-level">Intermédiaire</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🔷 Julia</div>
+                        <div class="language-level">Intermédiaire</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">💾 SQL</div>
+                        <div class="language-level">Avancé</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🐚 Bash/Shell</div>
+                        <div class="language-level">Avancé</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">🧮 MATLAB</div>
+                        <div class="language-level">Expert</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>🔬 Compétences Techniques</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Recherche Scientifique</h3>
+                        <ul>
+                            <li>Méthodologie expérimentale</li>
+                            <li>Analyse statistique avancée</li>
+                            <li>Rédaction scientifique</li>
+                            <li>Gestion de projets R&D</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>Intelligence Artificielle</h3>
+                        <ul>
+                            <li>Deep Learning (PyTorch, TensorFlow)</li>
+                            <li>NLP & Computer Vision</li>
+                            <li>Reinforcement Learning</li>
+                            <li>MLOps & Déploiement</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>Frameworks & Outils</h3>
+                        <ul>
+                            <li>React, Node.js, Django</li>
+                            <li>Docker, Kubernetes</li>
+                            <li>Git, CI/CD</li>
+                            <li>AWS, Azure, GCP</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>Communication</h3>
+                        <ul>
+                            <li>Présentation scientifique</li>
+                            <li>Rédaction multilingue</li>
+                            <li>Formation & mentorat</li>
+                            <li>Collaboration internationale</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>📚 Publications & Distinctions</h2>
+                <ul>
+                    <li>Plus de 40 publications dans des revues à comité de lecture (Nature, Science, NeurIPS, ICML)</li>
+                    <li>H-index : 25 | Citations : 2000+</li>
+                    <li>Prix de la meilleure thèse de la Société Française de Physique (2017)</li>
+                    <li>Bourse Marie Skłodowska-Curie (2021-2023)</li>
+                    <li>Membre de l'Académie des Sciences et Technologies</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>            background: linear-gradient(90deg, #da00ff, transparent);
+            0%, 100% { box-shadow: 0 0 10px rgba(218, 0, 255, 0.6); }
+            50% { box-shadow: 0 0 20px rgba(218, 0, 255, 1); }
+            animation: underlineGlow 2s ease-in-out infinite;
+        
+        @keyframes underlineGlow {
+
